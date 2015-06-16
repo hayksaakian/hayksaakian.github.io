@@ -3,6 +3,10 @@ var popup_in = 1000
 var showpopup = localStorage.getItem('popupbeta');
 var popup_url = "http://innovativemen.com/popup/"
 
+if(window.location.toString().indexOf(popup_url) !== -1){
+  showpopup = false
+}
+
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
         var fileref=document.createElement('script')
