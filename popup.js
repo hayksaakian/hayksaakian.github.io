@@ -33,9 +33,14 @@ function checkloadjscssfile(filename, filetype){
 
 var jQueryScriptOutputted = false;
 
+if(typeof($) == 'undefined' && typeof(jQuery) != 'undefined'){
+  var $ = jQuery
+}
+
 function initJQuery() {
+  
   //if the jQuery object isn't available
-  if (typeof(jQuery) == 'undefined') {
+  if (typeof($) == 'undefined') {
   
       if (! jQueryScriptOutputted) {
           //only output the script once..
