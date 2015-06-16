@@ -30,12 +30,16 @@ function checkloadjscssfile(filename, filetype){
 checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/jquery.magnific-popup.min.js", "js") //success
 checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/magnific-popup.css", "css") //redundant file, so file not added
 
+
+var showpopup = localStorage.getItem('popupbeta');
+var popup_url = "http://innovativemen.com/popup/"
+
 $(document).ready(function() {
     function openPopup(){
       $.magnificPopup.open({
         type: 'iframe',
         items: {
-            src: "http://example.com",        
+            src: popup_url,        
         },
         
         iframe: {
@@ -48,6 +52,9 @@ $(document).ready(function() {
     }
 
     setTimeout(function (){
+        if(!showpopup){
+            return
+        }
         openPopup()
     }, 1000)
 });
