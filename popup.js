@@ -31,38 +31,53 @@ function checkloadjscssfile(filename, filetype){
         alert("file already added!")
   }
 
+var jQueryScriptOutputted = false;
+
+function initJQuery() {
+  //if the jQuery object isn't available
+  if (typeof(jQuery) == 'undefined') {
+  
+      if (! jQueryScriptOutputted) {
+          //only output the script once..
+          jQueryScriptOutputted = true;
+          
+          //output the script (load it from google api)
+          document.write("<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>");
+      }
+      setTimeout("initJQuery()", 50);
+  } else {
+                      
+      $(function() {  
+        initPopup()
+      });
+  }     
+}
 function initPopupJS () {
-  if(typeof $ == 'undefined'){
-      checkloadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js", "js")
-  }
-   
+  initJQuery();
+}
+
+function initPopup () {
   checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/jquery.magnific-popup.min.js", "js") //success
   checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/magnific-popup.css", "css") //redundant file, so file not added
+  $(document).ready(function() {
 
+    setTimeout(openPopup, popup_in)
+  })
+}
 
-  function initPopup () {
-    $(document).ready(function() {
-
-      setTimeout(openPopup, popup_in)
-    })
-  }
-  setTimeout(initPopup, (typeof $ == 'undefined') ? 200 : 0)
-
-
-  function openPopup(){
-    $.magnificPopup.open({
-      type: 'iframe',
-      items: {
-          src: popup_url,        
-      },
-      iframe: {
-         markup: '<div class="mfp-iframe-scaler">'+
-                    '<div class="mfp-close"></div>'+
-                    '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
-                  '</div>'
-      }
-    })
-  }
+function openPopup(){
+  $.magnificPopup.open({
+    type: 'iframe',
+    items: {
+        src: popup_url,        
+    },
+    iframe: {
+       markup: '<div class="mfp-iframe-scaler">'+
+                  '<div class="mfp-close"></div>'+
+                  '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                '</div>'
+    }
+  })
 }
 
 if(showpopup){
