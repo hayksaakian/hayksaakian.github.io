@@ -1,3 +1,8 @@
+var popup_in = 1000 
+// milliseconds
+var showpopup = localStorage.getItem('popupbeta');
+var popup_url = "http://innovativemen.com/popup/"
+
 
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
@@ -26,35 +31,40 @@ function checkloadjscssfile(filename, filetype){
     else
         alert("file already added!")
 }
+
+if(typeof $ == 'undefined'){
+    checkloadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js", "js")
+}
  
 checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/jquery.magnific-popup.min.js", "js") //success
 checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/magnific-popup.css", "css") //redundant file, so file not added
 
 
-var showpopup = localStorage.getItem('popupbeta');
-var popup_url = "http://innovativemen.com/popup/"
-
-$(document).ready(function() {
-    function openPopup(){
-      $.magnificPopup.open({
-        type: 'iframe',
-        items: {
-            src: popup_url,        
-        },
-        
-        iframe: {
-           markup: '<div class="mfp-iframe-scaler">'+
-                      '<div class="mfp-close"></div>'+
-                      '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
-                    '</div>'
-        }
-      });
-    }
+function initPopup () {
+  $(document).ready(function() {
 
     setTimeout(function (){
-        if(!showpopup){
-            return
-        }
-        openPopup()
-    }, 1000)
-});
+      if(!showpopup){
+          return
+      }
+      openPopup()
+    }, popup_in)
+  })
+}
+setTimeout(initPopup, (typeof $ == 'undefined') ? 200 : 0)
+
+
+function openPopup(){
+  $.magnificPopup.open({
+    type: 'iframe',
+    items: {
+        src: popup_url,        
+    },
+    iframe: {
+       markup: '<div class="mfp-iframe-scaler">'+
+                  '<div class="mfp-close"></div>'+
+                  '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                '</div>'
+    }
+  })
+}
