@@ -1,8 +1,21 @@
-var popup_in = 1000 
-// milliseconds
-var showpopup = localStorage.getItem('popupbeta');
+var seconds_to_popup = 30 
+var days_between_popup = 30
+
+
 var popup_url = "http://innovativemen.com/popup/"
 
+var beta = localStorage.getItem('popupbeta');
+
+var showpopup = beta
+
+var lastseen = localStorage.getItem('lastseen') ? new Date(parseInt(localStorage.getItem('lastseen'))) : 0
+var today = new Date()
+var priorDate = new Date().setDate(today.getDate()-30)
+if(lastseen < priorDate){
+  showpopup = true
+}
+
+// to block recursion
 if(window.location.toString().indexOf(popup_url) !== -1){
   showpopup = false
 }
@@ -66,11 +79,10 @@ function initPopupJS () {
 }
 
 function initPopup () {
-  checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/jquery.magnific-popup.min.js", "js") //success
-  checkloadjscssfile("http://dimsemenov-static.s3.amazonaws.com/dist/magnific-popup.css", "css") //redundant file, so file not added
+  checkloadjscssfile("http://hayksaakian.github.io/jquery.magnific-popup.min.js", "js") 
+  checkloadjscssfile("http://hayksaakian.github.io/magnific-popup.css", "css")
   $(document).ready(function() {
-
-    setTimeout(openPopup, popup_in)
+    setTimeout(openPopup, seconds_to_popup*1000)
   })
 }
 
@@ -85,8 +97,14 @@ function openPopup(){
                   '<div class="mfp-close"></div>'+
                   '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
                 '</div>'
+    },
+    callbacks: {
+      open: function(){
+        localStorage.('lastseen', +new Date)
+      }
     }
   })
+
 }
 
 if(showpopup){
