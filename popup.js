@@ -100,7 +100,7 @@ function openPopup(){
     },
     callbacks: {
       open: function(){
-        localStorage.('lastseen', +new Date)
+        localStorage.setItem('lastseen', +new Date)
       }
     }
   })
