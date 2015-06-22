@@ -93,7 +93,7 @@ function openPopup(){
         src: popup_url,        
     },
     iframe: {
-       markup: '<div class="mfp-iframe-scaler" style="padding-top: 80%;">'+
+       markup: '<div class="mfp-iframe-scaler" style="padding-top: 70%;">'+
                   '<div class="mfp-close"></div>'+
                   '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
                 '</div>'
