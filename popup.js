@@ -79,6 +79,7 @@ function initPopupJS () {
 }
 
 function initPopup () {
+  // checkloadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/ouibounce/0.0.11/ouibounce.min.js", "js") 
   checkloadjscssfile("http://hayksaakian.github.io/jquery.magnific-popup.min.js", "js") 
   checkloadjscssfile("http://hayksaakian.github.io/magnific-popup.css", "css")
   $(document).ready(function() {
