@@ -1,8 +1,8 @@
 var seconds_to_popup = 30 
 var days_between_popup = 30
 
-var popup_url = "http://visitor.r20.constantcontact.com/d.jsp?llr=sryz7buab&p=oi&m=1121050223154&sit=9ev96kvjb&f=f1799d22-c972-4d79-b2f5-7352f09e3641"
-// var popup_url = "http://innovativemen.com/popup/"
+// var popup_url = "http://visitor.r20.constantcontact.com/d.jsp?llr=sryz7buab&p=oi&m=1121050223154&sit=9ev96kvjb&f=f1799d22-c972-4d79-b2f5-7352f09e3641"
+var popup_url = "http://www.innovativemen.com/popup/"
 
 var beta = localStorage.getItem('popupbeta');
 
