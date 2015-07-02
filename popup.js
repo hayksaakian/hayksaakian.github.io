@@ -10,7 +10,7 @@ var showpopup = beta
 
 var lastseen = localStorage.getItem('lastseen') ? new Date(parseInt(localStorage.getItem('lastseen'))) : 0
 var today = new Date()
-var priorDate = new Date().setDate(today.getDate()-30)
+var priorDate = new Date().setDate(today.getDate()-days_between_popup)
 if(lastseen < priorDate){
   showpopup = true
 }
