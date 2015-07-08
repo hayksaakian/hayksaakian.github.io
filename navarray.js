@@ -640,15 +640,6 @@ docWrite("<a href='#topPage'>top of page</a><br>");
 docPrint("output6");
 
 // ------------------------------------------------------------------------------
-window.PLUGINS = PLUGINS
-window.MIMES = MIMES
-window.PLUGINSLIST = pluginsList
-
-console.log('plugins', PLUGINS)
-console.log('mimes', MIMES)
-console.log('pluginsList', pluginsList)
-
-
 // Save generated data to a text file
 if (window.FILE){
   FILE.name = "navarray.txt";
@@ -658,6 +649,54 @@ if (window.FILE){
 
   FILE.SaveNow();
 }
+
+
+
+
+window.PLUGINS = PLUGINS
+window.MIMES = MIMES
+
+console.log('plugins', PLUGINS)
+console.log('mimes', MIMES)
+
+function cleanup(plugins){
+  var plugin_names = Object.keys(pluginsList)
+
+  var plugins = []
+
+  for (var i = 0; i < plugin_names.length; i++) {
+    var plugin = {
+      mimetypes: []
+    }
+
+    var _plugin = pluginsList(plugin_names[i])
+    plugin.name = _plugin.name
+    plugin.description = _plugin.description
+    plugin.filename = _plugin.filename
+
+    var _num_mimes = _plugin.length
+
+
+    for (var j = 0; j < _num_mimes; j++) {
+      var _mime = _plugin[j]
+
+      plugin.mimetypes.push({
+        description: _mime.description,
+        suffixes: _mime.suffixes,
+        type: _mime.type
+      })
+    }
+
+    plugins.push(plugin)
+  }
+
+  return plugins
+}
+
+var pluginsList = cleanup(pluginsList)
+
+window.PLUGINSLIST = pluginsList
+console.log('pluginsList', pluginsList)
 
 window.dispatchEvent(new CustomEvent("detected_plugins", {
   detail: pluginsList
