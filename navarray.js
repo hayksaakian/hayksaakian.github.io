@@ -669,7 +669,7 @@ function cleanup(plugins){
       mimetypes: []
     }
 
-    var _plugin = pluginsList(plugin_names[i])
+    var _plugin = pluginsList[plugin_names[i]]
     plugin.name = _plugin.name
     plugin.description = _plugin.description
     plugin.filename = _plugin.filename
