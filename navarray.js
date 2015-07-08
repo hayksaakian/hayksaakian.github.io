@@ -198,11 +198,19 @@ function enumerate(obj, str1, str2, skipObj, pluginObj){
        // Save the mimetype and plugin names.
        if (pluginObj){
 
-         try{if (obj[x].type) extraMIMES[obj[x].type]=1}
-         catch(e){}
+          try{
+            if (obj[x].type){
+              extraMIMES[obj[x].type]=obj
+            }
+          }
+          catch(e){}
 
-         try{if (obj.name) extraPLUGINS[obj.name]=1}
-         catch(e){}
+          try{
+            if (obj.name){
+              extraPLUGINS[obj.name]=obj
+            }
+          }
+          catch(e){}
        }
 
        try{docWrite(str1 + showPropertyName(x) + str2 + obj[x] + "<br>");}
