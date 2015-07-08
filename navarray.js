@@ -143,6 +143,7 @@ function docWrite(S){
 }
 
 function docPrint(node){
+  return
    var tmp = node ? document.getElementById(node) : 0;
    if (tmp){
    tmp.innerHTML += result;
@@ -177,6 +178,7 @@ function showPropertyValue(){
 // pluginObj [undefined/true/false]: if true, then obj input is a navigator.plugins{} obj,
 //   so we save the data.
 //
+// enumerate(T.enabledPlugin, "A.enabledPlugin", ": ", null, 1);
 function enumerate(obj, str1, str2, skipObj, pluginObj){
 
   var x, num=0, length;
@@ -223,6 +225,7 @@ function enumerate(obj, str1, str2, skipObj, pluginObj){
 
 
 } // end of enumerate()
+
 
 
 function copyObj(obj){
@@ -605,7 +608,7 @@ docWrite("<br>");
 docWrite("<div class='Title1'><b>Enumeration of window object</b></div><br>");
 
 // enumerate window object
-enumerate(window, "window", ": ");
+enumerate(window, "windowZZZZZZZ", ": ");
 
 docWrite("<br>");
 docWrite("window.ActiveXObject: " + window.ActiveXObject + "<br>");
@@ -624,7 +627,10 @@ docWrite("<a href='#topPage'>top of page</a><br>");
 docPrint("output6");
 
 // ------------------------------------------------------------------------------
-
+window.PLUGINS = PLUGINS
+window.MIMES = MIMES
+console.log('plugins', PLUGINS)
+console.log('mimes', MIMES)
 
 // Save generated data to a text file
 if (window.FILE){
