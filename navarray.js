@@ -662,7 +662,9 @@ if (window.FILE){
 window.dispatchEvent(new CustomEvent("detected_plugins", {
   detail: pluginsList
 }))
-callback(pluginsList)
+if(callback){
+  callback(pluginsList)
+}
 return pluginsList
 }
 })();  // end of wrapper function
