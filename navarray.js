@@ -637,8 +637,11 @@ docPrint("output6");
 // ------------------------------------------------------------------------------
 window.PLUGINS = PLUGINS
 window.MIMES = MIMES
+window.PLUGINSLIST = pluginsList
 console.log('plugins', PLUGINS)
 console.log('mimes', MIMES)
+console.log('pluginsList', pluginsList)
+
 
 // Save generated data to a text file
 if (window.FILE){
