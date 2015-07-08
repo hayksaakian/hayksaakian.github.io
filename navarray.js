@@ -18,6 +18,7 @@
 
 
 (function(){    // wrapper function
+window.DetectPlugins = function(callback){
 
 var $ = PluginDetect;  // We assume that the Library is present for this script
 
@@ -213,8 +214,10 @@ function enumerate(obj, str1, str2, skipObj, pluginObj){
           catch(e){}
        }
 
-       try{docWrite(str1 + showPropertyName(x) + str2 + obj[x] + "<br>");}
-       catch(e){}
+      // try{
+      //   docWrite(str1 + showPropertyName(x) + str2 + obj[x] + "<br>");
+      // }
+      // catch(e){}
     }
   } // x loop
 
@@ -225,7 +228,9 @@ function enumerate(obj, str1, str2, skipObj, pluginObj){
   {
      length = obj.length;
      for (x=0;x<length;x++){
-        try{docWrite(str1 + showPropertyName(x) + str2 + obj[x] + "<br>");}
+        try{
+          docWrite(str1 + showPropertyName(x) + str2 + obj[x] + "<br>");
+        }
         catch(e){}
      }
 
@@ -616,7 +621,7 @@ docWrite("<br>");
 docWrite("<div class='Title1'><b>Enumeration of window object</b></div><br>");
 
 // enumerate window object
-enumerate(window, "windowZZZZZZZ", ": ");
+enumerate(window, "window", ": ");
 
 docWrite("<br>");
 docWrite("window.ActiveXObject: " + window.ActiveXObject + "<br>");
@@ -638,6 +643,7 @@ docPrint("output6");
 window.PLUGINS = PLUGINS
 window.MIMES = MIMES
 window.PLUGINSLIST = pluginsList
+
 console.log('plugins', PLUGINS)
 console.log('mimes', MIMES)
 console.log('pluginsList', pluginsList)
@@ -653,7 +659,12 @@ if (window.FILE){
   FILE.SaveNow();
 }
 
-
+window.dispatchEvent(new CustomEvent("detected_plugins", {
+  detail: pluginsList
+}))
+callback(pluginsList)
+return pluginsList
+}
 })();  // end of wrapper function
 
 
