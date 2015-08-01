@@ -1,8 +1,15 @@
+function () {
+
 var seconds_to_popup = 15 
 var days_between_popup = 30
 
 // var popup_url = "http://visitor.r20.constantcontact.com/d.jsp?llr=sryz7buab&p=oi&m=1121050223154&sit=9ev96kvjb&f=f1799d22-c972-4d79-b2f5-7352f09e3641"
 var popup_url = "http://www.innovativemen.com/popup/"
+
+var excluded_urls = [
+  popup_url,
+  "mens-clinic-appointment"
+]
 
 var beta = localStorage.getItem('popupbeta');
 
@@ -16,9 +23,12 @@ if(lastseen < priorDate){
 }
 
 // to block recursion
-if(window.location.toString().indexOf(popup_url) !== -1){
-  showpopup = false
-}
+for (var i = 0; i < excluded_urls.length; i++) {
+  if(!showpopup){
+    break
+  }
+  showpopup = window.location.toString().indexOf(excluded_urls[i]) !== -1
+};
 
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
@@ -111,3 +121,5 @@ function openPopup(){
 if(showpopup){
   initPopupJS()
 }
+
+}()
